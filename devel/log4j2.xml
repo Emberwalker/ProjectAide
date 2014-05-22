@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" packages="com.mojang.util">
+    <Appenders>
+        <Console name="AdieOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%class.%M]: %msg%n" />
+        </Console>
+        <Console name="FmlSysOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n" />
+        </Console>
+        <Console name="SysOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %msg%n" />
+        </Console>
+        <Queue name="ServerGuiConsole">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n" />
+        </Queue>
+    </Appenders>
+    <Loggers>
+        <Logger level="info" name="com.mojang" additivity="false">
+            <AppenderRef ref="SysOut" level="INFO" />
+            <AppenderRef ref="ServerGuiConsole" level="INFO" />
+        </Logger>
+        <Logger level="info" name="net.minecraft" additivity="false">
+            <filters>
+                <MarkerFilter marker="NETWORK_PACKETS" onMatch="DENY" onMismatch="NEUTRAL" />
+            </filters>
+            <AppenderRef ref="SysOut" level="INFO" />
+            <AppenderRef ref="ServerGuiConsole" level="INFO" />
+        </Logger>
+
+        <!-- CUSTOM LOGGERS -->
+        <Logger level="all" name="Project Aide" additivity="false">
+            <filters>
+                <MarkerFilter marker="ISLAND_GENERATOR" onMatch="DENY" onMismatch="NEUTRAL" />
+            </filters>
+            <AppenderRef ref="AdieOut" />
+        </Logger>
+        <Logger level="all" name="io.drakon" additivity="false">
+            <filters>
+                <MarkerFilter marker="ISLAND_GENERATOR" onMatch="DENY" onMismatch="NEUTRAL" />
+            </filters>
+            <AppenderRef ref="AdieOut" />
+        </Logger>
+        <!-- END CUSTOM LOGGERS -->
+
+        <Root level="info">
+            <AppenderRef ref="FmlSysOut" />
+            <AppenderRef ref="ServerGuiConsole" />
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "aide",
+    "name": "Project Aide",
+    "description": "Floating islands, and some more floating island.",
+    "version": "${version}",
+    "mcversion": "${MCversion}",
+    "url": "https://github.com/Emberwalker/ProjectAide",
+    "updateUrl": "",
+    "authors": [
+      "Arkan"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "parent":"",
+    "dependencies": []
+  }
+]
