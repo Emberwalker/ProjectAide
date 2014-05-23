@@ -2,7 +2,9 @@ package io.drakon.aide.lib
 
 import cpw.mods.fml.common.registry.GameRegistry
 import io.drakon.aide.tile.TileGenerator
-import io.drakon.aide.block.GeneratorBlockBase
+import io.drakon.aide.lib.Repo._
+import net.minecraft.init.{Items, Blocks}
+import net.minecraft.item.ItemStack
 
 /**
  * Manager for registry additions.
@@ -12,9 +14,9 @@ import io.drakon.aide.block.GeneratorBlockBase
 object MCManager {
 
   def registerBlocks() {
-    GameRegistry.registerBlock(new GeneratorBlockBase("Mini", 2), "GeneratorBlockMini")
-    GameRegistry.registerBlock(new GeneratorBlockBase("Medium", 4), "GeneratorBlockMedium")
-    GameRegistry.registerBlock(new GeneratorBlockBase("Large", 6), "GeneratorBlockLarge")
+    GameRegistry.registerBlock(genMini, "GeneratorBlockMini")
+    GameRegistry.registerBlock(genMedium, "GeneratorBlockMedium")
+    GameRegistry.registerBlock(genLarge, "GeneratorBlockLarge")
   }
 
   def registerItems() {
@@ -23,6 +25,18 @@ object MCManager {
 
   def registerTiles() {
     GameRegistry.registerTileEntity(classOf[TileGenerator], "TileGenerator")
+  }
+
+  def registerRecipes() {
+    val dirt = new ItemStack(Blocks.dirt)
+    val pearl = new ItemStack(Items.ender_pearl)
+    val mini = new ItemStack(genMini)
+    val medium = new ItemStack(genMedium)
+    val large = new ItemStack(genLarge)
+
+    GameRegistry.addRecipe(mini, "ddd", "dpd", "ddd", 'p':Character, pearl, 'd':Character, dirt)
+    GameRegistry.addRecipe(medium, "ddd", "dpd", "ddd", 'p':Character, pearl, 'd':Character, mini)
+    GameRegistry.addRecipe(large, "ddd", "dpd", "ddd", 'p':Character, pearl, 'd':Character, medium)
   }
 
 }

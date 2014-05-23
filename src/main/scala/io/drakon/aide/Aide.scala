@@ -28,6 +28,8 @@ object Aide {
     logger.debug("Init.")
     MCManager.registerBlocks()
     MCManager.registerItems()
+    MCManager.registerTiles()
+    MCManager.registerRecipes()
   }
 
   @EventHandler
