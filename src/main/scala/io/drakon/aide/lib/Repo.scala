@@ -1,7 +1,7 @@
 package io.drakon.aide.lib
 
 import org.apache.logging.log4j.LogManager
-import net.minecraft.block.Block
+
 import io.drakon.aide.block.GeneratorBlockBase
 
 /**
@@ -13,7 +13,7 @@ object Repo {
 
   final val MOD_ID = "aide"
   final val MOD_NAME = "Project Aide"
-  final val MOD_VERSION = "${version}"
+  final val MOD_VERSION = "@VERSION@"
 
   val logger = LogManager.getLogger(MOD_NAME)
 

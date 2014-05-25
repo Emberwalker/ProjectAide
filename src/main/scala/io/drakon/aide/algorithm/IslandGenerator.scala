@@ -1,9 +1,10 @@
 package io.drakon.aide.algorithm
 
-import io.drakon.aide.lib.LogStore.MARKER_ISLAND_GEN
-
 import scala.util.Random
+
 import org.apache.logging.log4j.LogManager
+
+import io.drakon.aide.lib.LogStore.MARKER_ISLAND_GEN
 
 /**
  * Algorithm for generating conical-style floating islands.

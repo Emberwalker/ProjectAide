@@ -4,7 +4,7 @@
 
 //================================================
 // Variables
-mod_version = '0.1.1'
+mod_version = '0.1.2'
 mc_ver = '1.7.2'
 forge_ver = '10.12.1.1073'
 
@@ -82,8 +82,10 @@ if (!in_jenkins) {
 // If not on master, add branch to jar name
 if (branch != null && !branch.equals("master")) {
     version += "-" + branch
-} else {
+} else if (hash != null) {
     version += "-" + hash
+} else {
+    version += "-" + "UNKNOWN"
 }
 
 // Version tag for jar file name
@@ -98,11 +100,14 @@ gitManifest = manifest {
     }
 }
 
+//================================================
+// Source/Resource Processing and Compilation
+
 // Setup Forge plugin
 minecraft {
     version = mc_ver + "-" + forge_ver
     assetDir = 'run/assets'
-    replace '${version}', mod_version
+    replace '@VERSION@', mod_version
     replaceIn 'Repo.scala'
 }
 

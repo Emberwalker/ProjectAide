@@ -1,10 +1,11 @@
 package io.drakon.aide.lib
 
-import cpw.mods.fml.common.registry.GameRegistry
-import io.drakon.aide.tile.TileGenerator
-import io.drakon.aide.lib.Repo._
-import net.minecraft.init.{Items, Blocks}
+import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
+import cpw.mods.fml.common.registry.GameRegistry
+
+import io.drakon.aide.lib.Repo._
+import io.drakon.aide.tile.TileGenerator
 
 /**
  * Manager for registry additions.

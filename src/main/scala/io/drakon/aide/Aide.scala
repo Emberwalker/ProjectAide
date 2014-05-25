@@ -1,11 +1,11 @@
 package io.drakon.aide
 
-import io.drakon.aide.lib.Repo._
-
 import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.Mod.EventHandler
+import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
+
 import io.drakon.aide.lib.MCManager
+import io.drakon.aide.lib.Repo._
 
 /**
  * The Floating Island Generator.

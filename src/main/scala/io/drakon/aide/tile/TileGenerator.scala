@@ -1,18 +1,20 @@
 package io.drakon.aide.tile
 
-import net.minecraft.tileentity.TileEntity
-import org.apache.logging.log4j.LogManager
-import scala.concurrent._
-import ExecutionContext.Implicits.global
-import io.drakon.aide.algorithm.IslandGenerator
-import scala.concurrent.Future
-import io.drakon.aide.lib.{LogStore, BlockCoord}
 import scala.collection.mutable
+import scala.concurrent._
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.Random
-import net.minecraft.block.{BlockSapling, IGrowable, Block}
-import net.minecraft.init.Blocks
-import net.minecraftforge.common.util.ForgeDirection
 import java.util
+
+import org.apache.logging.log4j.LogManager
+
+import net.minecraft.block.{BlockSapling, IGrowable}
+import net.minecraft.init.Blocks
+import net.minecraft.tileentity.TileEntity
+import net.minecraftforge.common.util.ForgeDirection
+
+import io.drakon.aide.algorithm.IslandGenerator
+import io.drakon.aide.lib.{BlockCoord, LogStore}
 
 /**
  * Generator TE
@@ -24,7 +26,8 @@ class TileGenerator(final val scaling:Int) extends TileEntity {
   logger.entry(scaling.asInstanceOf[Integer])
 
   private val islGen = new IslandGenerator()
-  private val rand = new Random()
+  private val internalRand = new Random()
+  private val javaRand = new util.Random()
 
   private var radius = scaling
   private var height = scaling
@@ -48,7 +51,7 @@ class TileGenerator(final val scaling:Int) extends TileEntity {
           out += new Pair(new BlockCoord(x + xCoord - getHalfR, y + yCoord + 1, z + zCoord - getHalfR), blT)
         }
       }
-      out = rand.shuffle(out)
+      out = internalRand.shuffle(out)
       logger.exit(out.toQueue)
     }
   }
@@ -61,10 +64,11 @@ class TileGenerator(final val scaling:Int) extends TileEntity {
     isGrass match {
       case true =>
         getWorldObj.setBlock(c.getX, c.getY, c.getZ, Blocks.grass)
-        if (rand.nextInt(20) <= 1) Blocks.grass.asInstanceOf[IGrowable].func_149853_b(getWorldObj, new util.Random(), c.getX, c.getY, c.getZ)
-        else if (generatedSaplings <= 2 && rand.nextInt(200) <= 1) {
-          getWorldObj.setBlock(c.getX, c.getY + 1, c.getZ, Blocks.sapling, rand.nextInt(5), 3)
-          Blocks.sapling.asInstanceOf[BlockSapling].func_149878_d(getWorldObj, c.getX, c.getY + 1, c.getZ, new util.Random())
+        if (internalRand.nextInt(20) <= 1)
+          Blocks.grass.asInstanceOf[IGrowable].func_149853_b(getWorldObj,javaRand,c.getX, c.getY, c.getZ)
+        else if (generatedSaplings <= 2 && internalRand.nextInt(200) <= 1) {
+          getWorldObj.setBlock(c.getX, c.getY + 1, c.getZ, Blocks.sapling, internalRand.nextInt(5), 3)
+          Blocks.sapling.asInstanceOf[BlockSapling].func_149878_d(getWorldObj, c.getX, c.getY + 1, c.getZ, javaRand)
           generatedSaplings += 1
         }
       case _ => getWorldObj.setBlock(c.getX, c.getY, c.getZ, Blocks.dirt)

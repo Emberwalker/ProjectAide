@@ -1,16 +1,15 @@
 package io.drakon.aide.block
 
-import io.drakon.aide.lib.Repo._
-
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.world.{World, IBlockAccess}
-import net.minecraft.tileentity.TileEntity
-import io.drakon.aide.tile.TileGenerator
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.IIcon
+import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.common.util.ForgeDirection
+
+import io.drakon.aide.tile.TileGenerator
 
 /**
  * Island generator base block.
