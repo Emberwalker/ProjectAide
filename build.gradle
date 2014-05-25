@@ -4,10 +4,6 @@
 
 //================================================
 // Variables
-/*mod_version = '0.1.2'
-mc_ver = '1.7.2'
-forge_ver = '10.12.1.1073'*/
-
 def mod_version = gradle.ext.aide_mod_version
 def mc_ver = gradle.ext.aide_mc_ver
 def forge_ver = gradle.ext.aide_forge_ver
