@@ -4,9 +4,13 @@
 
 //================================================
 // Variables
-mod_version = '0.1.2'
+/*mod_version = '0.1.2'
 mc_ver = '1.7.2'
-forge_ver = '10.12.1.1073'
+forge_ver = '10.12.1.1073'*/
+
+def mod_version = gradle.ext.aide_mod_version
+def mc_ver = gradle.ext.aide_mc_ver
+def forge_ver = gradle.ext.aide_forge_ver
 
 //================================================
 // Pre-execute
@@ -47,13 +51,13 @@ apply plugin: 'forge'
 // Jar data
 
 // Grab system env
-env = System.getenv()
+def env = System.getenv()
 
 version = mc_ver + "-" + mod_version
 
-in_jenkins = false
+def in_jenkins = false
 // Get Jenkins metadata
-jenkinsManifest = manifest {
+def jenkinsManifest = manifest {
     if (env.BUILD_TAG != null) { // If this works, we'll assume we're in Jenkins atleast.
         attributes("Jenkins-Build": "true", "Jenkins-Tag": env.BUILD_TAG, "Jenkins-ID": env.BUILD_ID)
         in_jenkins = true
@@ -94,7 +98,7 @@ if (env.BUILD_NUMBER != null) {
 }
 
 // Get Git metadata (if in Jenkins)
-gitManifest = manifest {
+def gitManifest = manifest {
     if (env.GIT_BRANCH != null) {
         attributes("Git-Branch": branch, "Git-Hash": hash)
     }
@@ -113,7 +117,7 @@ minecraft {
 
 processResources {
     // Make sure this gets re-executed on updates.
-    inputs.property "version", version
+    inputs.property "version", mod_version
     inputs.property "MCversion", mc_ver
     
     // Process mcmod.info
